@@ -12,7 +12,7 @@ typealias scrollIndexHandle = () -> Int
 public typealias LTCreateViewControllerHandle = (Int) -> Void
 public typealias LTDidSelectTitleViewHandle = (Int) -> Void
 
-@objc public class LTPageTitleView: UIView {
+@objc open class LTPageTitleView: UIView {
     
     /*    --------------- 自定义titleView选择性重写以下方法 -------------- */
     
@@ -21,12 +21,12 @@ public typealias LTDidSelectTitleViewHandle = (Int) -> Void
      * layout中属性 isCustomTitleViewAndCreateSubController 根据实际情况是否需要设置为true
      */
     @objc public var mainScrollView: UIScrollView?
-    @objc public func glt_contentScrollViewDidScroll(_ scrollView: UIScrollView) { }
-    @objc public func glt_contentScrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
-    @objc public func glt_contentScrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {}
-    @objc public func glt_contentScrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
-    @objc public func glt_contentScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
-    @objc public func glt_contentScrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {}
+    @objc open func glt_contentScrollViewDidScroll(_ scrollView: UIScrollView) { }
+    @objc open func glt_contentScrollViewWillBeginDragging(_ scrollView: UIScrollView) {}
+    @objc open func glt_contentScrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {}
+    @objc open func glt_contentScrollViewDidEndDecelerating(_ scrollView: UIScrollView) {}
+    @objc open func glt_contentScrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {}
+    @objc open func glt_contentScrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {}
     
     /*    --------------- 自定义titleView选择性重写以上方法 -------------- */
     
