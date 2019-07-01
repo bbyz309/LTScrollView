@@ -108,29 +108,17 @@ extension LTPageTitleView {
 
 extension LTPageTitleView {
     
+    private func calculateButtonWidth(_ title: String) -> CGFloat{
+        let rect = (title as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: layout.titleFont.lineHeight),
+                                                     options: [.usesFontLeading],
+                                                     attributes: [.font : layout.titleFont],
+                                                     context: nil)
+        return ceil(rect.width)
+    }
+    
     private func setupButtonsLayout() {
         
-        if titles.count == 0 { return }
-        
-        // 将所有的宽度计算出来放入数组
-        for (_, text) in titles.enumerated() {
-            if layout.isAverage {
-                let textAverageW = (bounds.width - layout.lrMargin * 2.0 - layout.titleMargin * CGFloat(titles.count - 1)) / CGFloat(titles.count)
-                glt_textWidths.append(textAverageW)
-                glt_lineWidths.append(textAverageW)
-            }else {
-                if text.count == 0 {
-                    glt_textWidths.append(60)
-                    glt_lineWidths.append(60)
-                    continue
-                }
-                let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
-                glt_textWidths.append(textW)
-                glt_lineWidths.append(textW)
-            }
-        }
-        
-        
+        guard titles.count > 0 else { return }
         
         // 将所有的宽度计算出来放入数组
         for text in titles {
@@ -144,13 +132,12 @@ extension LTPageTitleView {
                     continue
                 }
             }
-            let textW = text.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 8), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : layout.titleFont ?? UIFont.systemFont(ofSize: 16)], context: nil).size.width
+            let textW = calculateButtonWidth(text)
             if !layout.isAverage {
                 glt_textWidths.append(textW)
             }
             glt_lineWidths.append(textW)
         }
-        
         
         // 按钮布局
         var upX: CGFloat = layout.lrMargin
